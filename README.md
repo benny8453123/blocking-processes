@@ -36,3 +36,18 @@ ben@ben-OptiPlex-7060:/working/ben/module/blocking-processes/completions$ sudo i
 [ 4131.453214] Flywheel spins up
 [ 4132.465561] completions exit
 ```
+
+::: info
+Key point:
+1. Using struct completion and api
+	> 1. init_completion
+	> 1. complete_all
+	> 2. complete_and_exit
+	> 3. wait_for_completion
+
+2. Using kernel multi-threads
+	> 1. struct task_struct
+	> 2. kthread_create
+	> 3. wake_up_process
+	> 4. kthread_stop
+:::

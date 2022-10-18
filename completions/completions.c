@@ -8,6 +8,7 @@
 #include <linux/module.h>
 
 static struct {
+	/*** My key point ***/
     struct completion crank_comp;
     struct completion flywheel_comp;
 } machine;
@@ -16,6 +17,7 @@ static int machine_crank_thread(void *arg)
 {
     pr_info("Turn the crank\n");
 
+	/*** My key point ***/
     complete_all(&machine.crank_comp);
     complete_and_exit(&machine.crank_comp, 0);
 }
@@ -33,14 +35,17 @@ static int machine_flywheel_spinup_thread(void *arg)
 
 static int completions_init(void) 
 { 
+	/*** My key point ***/
     struct task_struct *crank_thread; 
     struct task_struct *flywheel_thread; 
  
     pr_info("completions example\n"); 
  
+	/*** My key point ***/
     init_completion(&machine.crank_comp); 
     init_completion(&machine.flywheel_comp); 
  
+	/*** My key point ***/
     crank_thread = kthread_create(machine_crank_thread, NULL, "KThread Crank"); 
     if (IS_ERR(crank_thread)) 
         goto ERROR_THREAD_1; 
@@ -50,6 +55,7 @@ static int completions_init(void)
     if (IS_ERR(flywheel_thread)) 
         goto ERROR_THREAD_2; 
  
+	/*** My key point ***/
     wake_up_process(flywheel_thread); 
     wake_up_process(crank_thread); 
  
@@ -64,6 +70,7 @@ ERROR_THREAD_1:
 
 static void completions_exit(void)
 {
+	/*** My key point ***/
     wait_for_completion(&machine.crank_comp);
     wait_for_completion(&machine.flywheel_comp);
 
