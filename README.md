@@ -10,6 +10,19 @@ get into sleep/ and make first
 get into test/ and make first
 1. `./test.sh`
 
+::: info
+Key point:
+1. Using atomic
+	> 1. ATOMIC_INIT
+	> 2. atomic_read
+	> 3. atomic_cmpxchg
+	> 4. atomic_set
+
+2. Using wait queue 
+	> 1. DECLARE_WAIT_QUEUE_HEAD
+	> 2. wait_event_interruptible
+	> 3. wake_up
+:::
 
 # completions
 ## how to test?

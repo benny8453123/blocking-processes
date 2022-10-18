@@ -100,6 +100,7 @@ static int module_open(struct inode *inode, struct file *file)
      */
     try_module_get(THIS_MODULE);
 
+	/*** My key point ***/
     while (atomic_cmpxchg(&already_open, 0, 1)) {
         int i, is_sig = 0;
 
@@ -110,6 +111,8 @@ static int module_open(struct inode *inode, struct file *file)
          * is closed) or when a signal, such as Ctrl-C, is sent
          * to the process
          */
+		
+		/*** My key point ***/
         wait_event_interruptible(waitq, !atomic_read(&already_open));
 
         /* If we woke up because we got a signal we're not blocking,
@@ -149,6 +152,7 @@ static int module_close(struct inode *inode, struct file *file)
     /* Wake up all the processes in waitq, so if anybody is waiting for the
      * file, they can have it.
      */
+	/*** My key point ***/
     wake_up(&waitq);
 
     module_put(THIS_MODULE);
