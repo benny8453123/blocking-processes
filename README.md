@@ -1,5 +1,7 @@
 blocking-processes
 ===
+Two sample are follow to lkmpg cp11.1 and cp11.2
+
 # sleep
 ## how to test?
 ### Module part
